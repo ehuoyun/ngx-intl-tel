@@ -1,0 +1,27 @@
+<div class="intl-tel-input allow-dropdown">
+  <div class="flag-container">
+    <div class="selected-flag" (click)="isCountryListVisible = true;">
+      <div class="iti-flag" [ngClass]="selectedCountry.flagClass"></div>
+      <div class="iti-arrow"></div>
+    </div>
+    <ul class="country-list dropdown-menu" *ngIf="isCountryListVisible">
+      <li class="country" *ngFor="let country of preferredCountryList" (click)="onCountrySelect(country, focusable)">
+        <div class="flag-box">
+          <div class="iti-flag" [ngClass]="country.flagClass"></div>
+        </div>
+        <span class="country-name">{{country.name}}</span>
+        <span class="dial-code">+{{country.dialCode}}</span>
+      </li>
+      <li class="divider"></li>
+      <li class="country" *ngFor="let country of countryList" (click)="onCountrySelect(country, focusable)">
+        <div class="flag-box">
+          <div class="iti-flag" [ngClass]="country.flagClass"></div>
+        </div>
+        <span class="country-name">{{country.name}}</span>
+        <span class="dial-code">+{{country.dialCode}}</span>
+      </li>
+    </ul>
+  </div>
+  <input type="tel" id="phone" class="form-control" autocomplete="off" (keypress)="onInputKeyPress($event)" [(ngModel)]="phoneNumberWithoutCountryCode"
+    (ngModelChange)="onPhoneNumberChange()" [placeholder]="selectedCountry.placeHolder" #focusable>
+</div>
